@@ -1,4 +1,4 @@
-import { UsersService } from 'src/users/user.service';
+import { UsersService } from '../users/user.service';
 import * as bcrypt from 'bcrypt';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 export class AuthenticationService {
