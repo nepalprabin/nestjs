@@ -5,6 +5,8 @@ import { PostModule } from './posts/posts.module';
 import { DatabaseModule } from './database.module';
 import { ExceptionsLoggerFilter } from './utils/exceptionsLogger.filter';
 import { APP_FILTER } from '@nestjs/core';
+import { AuthenticationModule } from './auth/authentication.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { APP_FILTER } from '@nestjs/core';
       }),
     }),
     DatabaseModule,
+    AuthenticationModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [{ provide: APP_FILTER, useClass: ExceptionsLoggerFilter }],

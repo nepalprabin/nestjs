@@ -11,7 +11,7 @@ import {
 import PostService from './posts.service';
 import { CreatePostDto } from './dto/createPost.dto';
 import { UpdatePostDto } from './dto/updatePost.dto';
-import JwtAuthenticationGuard from 'src/authentication/jwt-authentication.guard';
+import JwtAuthenticationGuard from '../auth/jwt-authentication.guard';
 
 @Controller('posts')
 export default class PostsController {

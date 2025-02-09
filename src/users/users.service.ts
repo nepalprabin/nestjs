@@ -8,11 +8,11 @@ import CreateUserDto from './dto/createUser.dto';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private usersRepository: Repository<User>,
   ) {}
 
   async getByEmail(email: string) {
-    const user = await this.userRepository.findBy({ email });
+    const user = await this.usersRepository.findOne({ where: { email } });
     if (user) {
       return user;
     }
@@ -23,7 +23,7 @@ export class UsersService {
   }
 
   async getById(id: number) {
-    const user = await this.userRepository.findOneBy({ id });
+    const user = await this.usersRepository.findBy({ id });
     if (user) {
       return user;
     }
@@ -34,8 +34,8 @@ export class UsersService {
   }
 
   async create(userData: CreateUserDto) {
-    const newUser = await this.userRepository.create(userData);
-    await this.userRepository.save(newUser);
+    const newUser = await this.usersRepository.create(userData);
+    await this.usersRepository.save(newUser);
     return newUser;
   }
 }
