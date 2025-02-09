@@ -3,6 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
 import { PostModule } from './posts/posts.module';
 import { DatabaseModule } from './database.module';
+import { ExceptionsLoggerFilter } from './utils/exceptionsLogger.filter';
+import { APP_FILTER } from '@nestjs/core';
+import { AuthenticationModule } from './auth/authentication.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -20,8 +24,10 @@ import { DatabaseModule } from './database.module';
       }),
     }),
     DatabaseModule,
+    AuthenticationModule,
+    UsersModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [{ provide: APP_FILTER, useClass: ExceptionsLoggerFilter }],
 })
 export class AppModule {}
