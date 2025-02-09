@@ -7,8 +7,11 @@ import {
   UseGuards,
   Res,
   Get,
+  UseInterceptors,
+  SerializeOptions,
 } from '@nestjs/common';
 import { Response } from 'express';
+import { ClassSerializerInterceptor } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
 import RegisterDto from './dto/register.dto';
 import RequestWithUser from './requestWithUser.interface';
@@ -16,6 +19,10 @@ import { LocalAuthenticationGuard } from './localAuthentication.guard';
 import JwtAuthenticationGuard from './jwt-authentication.guard';
 
 @Controller('authentication')
+@UseInterceptors(ClassSerializerInterceptor)
+@SerializeOptions({
+  strategy: 'excludeAll',
+})
 export class AuthenticationController {
   constructor(private readonly authenticationService: AuthenticationService) {}
 
