@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -18,6 +19,14 @@ import RequestWithUser from '../auth/requestWithUser.interface';
 @Controller('posts')
 export default class PostsController {
   constructor(private readonly postsService: PostService) {}
+
+  @Get()
+  async getPosts(@Query('search') search: string) {
+    if (search) {
+      return this.postsService.searchForPosts(search);
+    }
+    return this.postsService.getAllPosts();
+  }
 
   @Get()
   getAllPosts() {
